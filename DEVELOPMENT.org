@@ -1,0 +1,604 @@
+* Spec
+
+
+[[file:~/work/data-sheets/kiina/dps5020]]
+
+COmmunication protocol [[file:~/work/data-sheets/kiina/dps5020/DPS5020%20CNC%20Communication%20Protocol%20V1.2.pdf]]
+
+- MODBUS RTU. This can be used via RS232, RS485 or Bluetooth serial interface.
+
+
+Modbus spec: https://modbus.org/docs/PI_MBUS_300.pdf
+
+
+* Activate conda ympäristö =pdata=
+
+#+BEGIN_SRC elisp
+(conda-env-activate "pdata")
+#+END_SRC
+
+#+RESULTS:
+: Switched to conda environment: pdata
+
+
+
+* ebench-dps
+
+
+* Notes
+
+
+** lsusb
+
+#+BEGIN_SRC bash :eval no-export :results output
+lsusb
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 04f2:b40d Chicony Electronics Co., Ltd 
+Bus 003 Device 006: ID 258a:1006  
+Bus 003 Device 004: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 003 Device 002: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 015: ID 0a92:00d1 EGO SYStems, Inc. 
+Bus 003 Device 005: ID 138a:0050 Validity Sensors, Inc. Swipe Fingerprint Sensor
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+#+end_example
+
+
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 04f2:b40d Chicony Electronics Co., Ltd 
+Bus 003 Device 009: ID 1a86:7523 QinHeng Electronics HL-340 USB-Serial adapter
+Bus 003 Device 006: ID 258a:1006  
+Bus 003 Device 004: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 003 Device 002: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 005: ID 138a:0050 Validity Sensors, Inc. Swipe Fingerprint Sensor
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+#+end_example
+
+#+BEGIN_SRC bash :eval no-export :results output
+lsusb | grep USB-Serial
+#+END_SRC
+
+#+RESULTS:
+: Bus 003 Device 016: ID 1a86:7523 QinHeng Electronics HL-340 USB-Serial adapter
+
+
+
+** www-resources
+
+https://raw.githubusercontent.com/kanflo/opendps/master/dpsctl/dpsctl.py
+
+https://forum-raspberrypi.de/forum/thread/46324-ansteuerung-programmierbarer-stepdown-regler-dps/
+
+https://lygte-info.dk/review/Power%20DPS5020-USB%20UK.html
+
+
+CH340
+
+
+** Which modbus libary
+
+https://stackoverflow.com/questions/17081442/python-modbus-library
+
+https://github.com/AdvancedClimateSystems/uModbus
+
+
+** Test mobdus-cli
+
+#+BEGIN_SRC bash :eval no-export :results output
+modbus -h
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+usage: modbus [-h] [-r REGISTERS] [-s SLAVE_ID] [-b BAUD] [-p STOP_BITS]
+              [-P {e,o,n}] [-v] [-t TIMEOUT]
+              device access [access ...]
+
+positional arguments:
+  device
+  access
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -r REGISTERS, --registers REGISTERS
+  -s SLAVE_ID, --slave-id SLAVE_ID
+  -b BAUD, --baud BAUD
+  -p STOP_BITS, --stop-bits STOP_BITS
+  -P {e,o,n}, --parity {e,o,n}
+  -v, --verbose
+  -t TIMEOUT, --timeout TIMEOUT
+#+end_example
+
+
+#+BEGIN_SRC bash :eval no-export :results output
+ls -ltr /dev
+#+END_SRC
+
+#+BEGIN_SRC bash :eval no-export :results output
+dmesg
+#+END_SRC
+
+#+BEGIN_SRC bash :eval no-export :results output
+lsusb
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 04f2:b40d Chicony Electronics Co., Ltd 
+Bus 003 Device 010: ID 258a:1006  
+Bus 003 Device 009: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 003 Device 008: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 005: ID 138a:0050 Validity Sensors, Inc. Swipe Fingerprint Sensor
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+#+end_example
+
+
+#+begin_example
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 04f2:b40d Chicony Electronics Co., Ltd 
+Bus 003 Device 010: ID 258a:1006  
+Bus 003 Device 009: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 003 Device 008: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 005: ID 138a:0050 Validity Sensors, Inc. Swipe Fingerprint Sensor
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+#+end_example
+
+
+
+
+#+begin_example
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 04f2:b40d Chicony Electronics Co., Ltd 
+Bus 003 Device 010: ID 258a:1006  
+Bus 003 Device 009: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 003 Device 008: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 005: ID 138a:0050 Validity Sensors, Inc. Swipe Fingerprint Sensor
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+#+end_example
+
+
+
+#+begin_example
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 04f2:b40d Chicony Electronics Co., Ltd 
+Bus 003 Device 010: ID 258a:1006  
+Bus 003 Device 009: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 003 Device 008: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 005: ID 138a:0050 Validity Sensors, Inc. Swipe Fingerprint Sensor
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+#+end_example
+
+
+#+begin_example
+Bus 002 Device 002: ID 8087:8000 Intel Corp. 
+Bus 002 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 001 Device 002: ID 8087:8008 Intel Corp. 
+Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+Bus 004 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub
+Bus 003 Device 003: ID 04f2:b40d Chicony Electronics Co., Ltd 
+Bus 003 Device 010: ID 258a:1006  
+Bus 003 Device 009: ID 046d:c52b Logitech, Inc. Unifying Receiver
+Bus 003 Device 008: ID 1a40:0101 Terminus Technology Inc. Hub
+Bus 003 Device 005: ID 138a:0050 Validity Sensors, Inc. Swipe Fingerprint Sensor
+Bus 003 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+#+end_example
+
+
+
+
+
+
+** Detect serial ports (dps_modbus)
+
+
+https://forum-raspberrypi.de/forum/thread/46324-ansteuerung-programmierbarer-stepdown-regler-dps/
+
+
+#+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*
+import sys
+import serial
+import glob
+
+def serial_ports():
+	""" Lists serial port names
+		:raises EnvironmentError:
+			On unsupported or unknown platforms
+		:returns:
+			A list of the serial ports available on the system
+	"""
+	if sys.platform.startswith('win'):
+		ports = ['COM%s' % (i + 1) for i in range(256)]
+	elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+		# this excludes your current terminal "/dev/tty"
+		ports = glob.glob('/dev/tty[A-Za-z]*')
+	elif sys.platform.startswith('darwin'):
+		ports = glob.glob('/dev/tty.*')
+	else:
+		raise EnvironmentError('Unsupported platform')
+
+	result = []
+	for port in ports:
+		try:
+			s = serial.Serial(port)
+			s.close()
+			result.append(port)
+		except (OSError, serial.SerialException):
+			pass
+	return result
+
+
+#+END_SRC
+
+#+RESULTS:
+: Python 3.9.1 | packaged by conda-forge | (default, Jan 10 2021, 02:55:42) 
+: [GCC 9.3.0] on linux
+: Type "help", "copyright", "credits" or "license" for more information.
+
+#+BEGIN_SRC python :eval no-export :results output :noweb no :session *Python*
+ports = serial_ports()
+print( "ports={}".format(ports))
+#+END_SRC
+
+#+RESULTS:
+: ports=['/dev/ttyUSB0']
+
+
+: ports=['/dev/ttyUSB0']
+
+
+** lsmod
+
+#+BEGIN_SRC bash :eval no-export :results output  :dir /sudo::
+lsmod
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+Module                  Size  Used by
+snd_usb_audio         208896  0
+snd_usbmidi_lib        32768  1 snd_usb_audio
+nfsv3                  40960  1
+nfs_acl                16384  1 nfsv3
+rfcomm                 77824  4
+dm_crypt               40960  2
+pci_stub               16384  1
+vboxpci                24576  0
+vboxnetadp             28672  0
+vboxnetflt             28672  0
+vboxdrv               471040  3 vboxpci,vboxnetadp,vboxnetflt
+xt_conntrack           16384  2
+ipt_MASQUERADE         16384  2
+nf_nat_masquerade_ipv4    16384  1 ipt_MASQUERADE
+nf_conntrack_netlink    40960  0
+nfnetlink              16384  2 nf_conntrack_netlink
+xfrm_user              32768  1
+xfrm_algo              16384  1 xfrm_user
+xt_addrtype            16384  2
+iptable_filter         16384  1
+iptable_nat            16384  1
+nf_conntrack_ipv4      16384  5
+nf_defrag_ipv4         16384  1 nf_conntrack_ipv4
+nf_nat_ipv4            16384  1 iptable_nat
+nf_nat                 32768  2 nf_nat_masquerade_ipv4,nf_nat_ipv4
+nf_conntrack          135168  7 xt_conntrack,nf_nat_masquerade_ipv4,nf_conntrack_ipv4,nf_nat,ipt_MASQUERADE,nf_nat_ipv4,nf_conntrack_netlink
+libcrc32c              16384  2 nf_conntrack,nf_nat
+br_netfilter           24576  0
+bridge                155648  1 br_netfilter
+stp                    16384  1 bridge
+llc                    16384  2 bridge,stp
+vmnet                  49152  13
+vmw_vsock_vmci_transport    32768  0
+vsock                  36864  1 vmw_vsock_vmci_transport
+vmw_vmci               69632  1 vmw_vsock_vmci_transport
+vmmon                 106496  0
+rpcsec_gss_krb5        36864  0
+auth_rpcgss            61440  1 rpcsec_gss_krb5
+nfsv4                 577536  0
+nfs                   262144  3 nfsv4,nfsv3
+lockd                  94208  2 nfsv3,nfs
+grace                  16384  1 lockd
+fscache                65536  2 nfsv4,nfs
+ccm                    20480  6
+aufs                  241664  0
+overlay                77824  0
+bnep                   20480  2
+binfmt_misc            20480  1
+nls_iso8859_1          16384  2
+wmi_bmof               16384  0
+hp_wmi                 16384  0
+sparse_keymap          16384  1 hp_wmi
+intel_rapl             20480  0
+x86_pkg_temp_thermal    16384  0
+intel_powerclamp       16384  0
+coretemp               16384  0
+snd_hda_codec_hdmi     49152  1
+kvm_intel             217088  0
+kvm                   614400  1 kvm_intel
+irqbypass              16384  1 kvm
+crct10dif_pclmul       16384  0
+crc32_pclmul           16384  0
+ghash_clmulni_intel    16384  0
+pcbc                   16384  0
+uvcvideo               90112  0
+snd_hda_codec_idt      57344  1
+videobuf2_vmalloc      16384  1 uvcvideo
+snd_hda_codec_generic    73728  1 snd_hda_codec_idt
+aesni_intel           188416  8
+arc4                   16384  2
+videobuf2_memops       16384  1 videobuf2_vmalloc
+videobuf2_v4l2         24576  1 uvcvideo
+videobuf2_core         40960  2 videobuf2_v4l2,uvcvideo
+rt2800pci              16384  0
+snd_hda_intel          45056  12
+rt2800mmio             16384  1 rt2800pci
+aes_x86_64             20480  1 aesni_intel
+videodev              184320  3 videobuf2_core,videobuf2_v4l2,uvcvideo
+snd_hda_codec         126976  4 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec_idt
+nouveau              1708032  1
+rt2800lib             114688  2 rt2800mmio,rt2800pci
+crypto_simd            16384  1 aesni_intel
+glue_helper            16384  1 aesni_intel
+media                  40960  2 videodev,uvcvideo
+rt2x00pci              16384  1 rt2800pci
+cryptd                 24576  5 crypto_simd,ghash_clmulni_intel,aesni_intel
+rt2x00mmio             16384  2 rt2800mmio,rt2800pci
+rt2x00lib              53248  5 rt2x00mmio,rt2x00pci,rt2800mmio,rt2800pci,rt2800lib
+intel_cstate           20480  0
+snd_hda_core           81920  5 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_hda_codec_idt
+mac80211              786432  3 rt2x00pci,rt2x00lib,rt2800lib
+intel_rapl_perf        16384  0
+snd_hwdep              20480  2 snd_usb_audio,snd_hda_codec
+mxm_wmi                16384  1 nouveau
+cfg80211              634880  2 rt2x00lib,mac80211
+snd_pcm                98304  6 snd_hda_codec_hdmi,snd_hda_intel,snd_usb_audio,snd_hda_codec,snd_hda_core
+input_leds             16384  0
+ttm                   106496  1 nouveau
+i915                 1622016  55
+rtsx_pci_ms            20480  0
+joydev                 24576  0
+snd_seq_midi           16384  0
+eeprom_93cx6           16384  1 rt2800pci
+serio_raw              16384  0
+snd_seq_midi_event     16384  1 snd_seq_midi
+memstick               16384  1 rtsx_pci_ms
+snd_rawmidi            32768  2 snd_seq_midi,snd_usbmidi_lib
+drm_kms_helper        172032  2 i915,nouveau
+snd_seq                65536  2 snd_seq_midi,snd_seq_midi_event
+drm                   401408  24 drm_kms_helper,i915,ttm,nouveau
+snd_seq_device         16384  3 snd_seq,snd_seq_midi,snd_rawmidi
+i2c_algo_bit           16384  2 i915,nouveau
+snd_timer              32768  2 snd_seq,snd_pcm
+fb_sys_fops            16384  1 drm_kms_helper
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            16384  1 drm_kms_helper
+mei_me                 40960  0
+sysimgblt              16384  1 drm_kms_helper
+shpchp                 36864  0
+lpc_ich                24576  0
+snd                    81920  36 snd_hda_codec_generic,snd_seq,snd_seq_device,snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_usb_audio,snd_usbmidi_lib,snd_hda_codec,snd_timer,snd_pcm,snd_hda_codec_idt,snd_rawmidi
+mei                    94208  1 mei_me
+video                  45056  2 i915,nouveau
+soundcore              16384  1 snd
+mac_hid                16384  0
+hp_accel               28672  0
+lis3lv02d              20480  1 hp_accel
+input_polldev          16384  1 lis3lv02d
+hp_wireless            16384  0
+intel_smartconnect     16384  0
+wmi                    24576  4 hp_wmi,wmi_bmof,mxm_wmi,nouveau
+sch_fq_codel           20480  8
+rtbth                  86016  1
+bluetooth             520192  28 rtbth,bnep,rfcomm
+ecdh_generic           24576  1 bluetooth
+parport_pc             32768  0
+sunrpc                331776  20 nfsv4,auth_rpcgss,lockd,nfsv3,rpcsec_gss_krb5,nfs_acl,nfs
+ppdev                  20480  0
+lp                     20480  0
+parport                49152  3 parport_pc,lp,ppdev
+ip_tables              28672  2 iptable_filter,iptable_nat
+x_tables               40960  5 xt_conntrack,iptable_filter,ipt_MASQUERADE,xt_addrtype,ip_tables
+autofs4                40960  2
+hid_logitech_hidpp     36864  0
+hid_logitech_dj        20480  0
+hid_generic            16384  0
+usbhid                 49152  0
+hid                   122880  4 usbhid,hid_generic,hid_logitech_dj,hid_logitech_hidpp
+rtsx_pci_sdmmc         24576  0
+psmouse               151552  0
+ahci                   40960  2
+r8169                  86016  0
+rtsx_pci               69632  2 rtsx_pci_sdmmc,rtsx_pci_ms
+libahci                32768  1 ahci
+mii                    16384  1 r8169
+#+end_example
+
+
+**  CH34x module
+
+*** Download
+
+from https://learn.sparkfun.com/tutorials/how-to-install-ch340-drivers/linux
+
+#+BEGIN_SRC bash :eval no-export :results output
+ls -ltr CH341SER_LINUX.ZIP
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+total 60
+-rw-rw-r-- 1 jj   jj     589 kesä  15 15:39 README.org
+-rw-rw-r-- 1 jj   jj     361 kesä  15 15:42 #README.org#
+-rw-rw-r-- 1 jj   jj    3404 kesä  15 21:18 apu.tmp
+-rw-rw-r-- 1 jj   jj    3404 kesä  15 21:18 apu1.tmp
+-rw-rw-r-- 1 jj   jj    3934 kesä  15 21:51 apu2.tmp
+-rw-rw-r-- 1 jj   jj    3934 kesä  15 21:51 apu3.tmp
+-rw-rw-r-- 1 jj   jj     828 kesä  15 21:59 serialports.py
+drwxr-xr-x 2 root root  4096 kesä  15 22:01 __pycache__
+-rw-rw-r-- 1 jj   jj    8703 kesä  15 22:37 CH341SER_LINUX.ZIP
+-rw-rw-r-- 1 jj   jj   13521 kesä  15 22:39 DEVELOPMENT.org
+#+end_example
+
+#+BEGIN_SRC bash :eval no-export :results output
+unzip CH341SER_LINUX.ZIP
+#+END_SRC
+
+#+RESULTS:
+: Archive:  CH341SER_LINUX.ZIP
+:    creating: CH341SER_LINUX/
+:   inflating: CH341SER_LINUX/ch34x.c  
+:   inflating: CH341SER_LINUX/Makefile  
+:   inflating: CH341SER_LINUX/readme.txt  
+
+*** Compile 
+:PROPERTIES:
+:header-args:bash: :dir  CH341SER_LINUX
+:END:
+
+
+
+#+BEGIN_SRC bash :eval no-export :results output
+cat readme.txt
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+// ChangeLog 
+// 1.0 - 1.1   modified to solve transmition between ch341 and ch341
+// 1.1 - 1.2   Support high Linux kernel
+Instructions
+
+Note: 1.Please run followed executable programs as root privilege
+      2.Current Driver support versions of linux kernel range from 2.6.25 to 3.13.x
+      3.Current Driver support 32bits and 64bits linux systems
+
+Usage:
+	(load or unload linux driver of CH34x)
+	//compile 
+	#make
+	//load ch34x chips driver
+	#make load
+	//unload ch34x chips driver
+	#make unload
+// 1.2 - 1.3 Fix some bugs			
+
+#+end_example
+
+Compile errors
+
+#+BEGIN_SRC bash :eval no-export :results output
+make
+#+END_SRC
+
+#+RESULTS:
+
+
+*** Patch
+:PROPERTIES:
+:header-args:bash: :dir  CH341SER_LINUX
+:END:
+
+https://github.com/juliagoda/CH341SER
+
+Added line
+#include <linux/sched/signal.h>
+
+which helps to fix the problem below:
+error: implicit declaration of function ‘signal_pending’; did you mean ‘timer_pending’? [-Werror=implicit-function-declaration]
+
+and changed line:
+wait_queue_t wait;
+to
+wait_queue_entry_t wait;
+which helps to fix next problem below:
+error: unknown type name ‘wait_queue_t’; did you mean ‘wait_event’?
+
+added version check of kernel for signal.h:
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,11,0)
+#include <linux/signal.h>
+#else
+#include <linux/sched/signal.h>
+#endif
+
+
+Thanks to hesaputra - #10
+
+Additionally first pull request helped to merge changes for version 1.5 released in 2018-03-18: [https://github.com/juliagoda/CH341SER/pull/1](https://github.com/juliagoda/CH341SER/pull/1)
+
+
+#+BEGIN_SRC bash :eval no-export :results output
+make 
+#+END_SRC
+
+#+RESULTS:
+: make -C /lib/modules/4.15.0-136-generic/build  M=/home/jj/work/ebench-dps/CH341SER_LINUX  
+: make[1]: Entering directory '/usr/src/linux-headers-4.15.0-136-generic'
+:   CC [M]  /home/jj/work/ebench-dps/CH341SER_LINUX/ch34x.o
+:   Building modules, stage 2.
+:   MODPOST 1 modules
+:   CC      /home/jj/work/ebench-dps/CH341SER_LINUX/ch34x.mod.o
+:   LD [M]  /home/jj/work/ebench-dps/CH341SER_LINUX/ch34x.ko
+: make[1]: Leaving directory '/usr/src/linux-headers-4.15.0-136-generic'
+
+#+BEGIN_SRC bash :eval no-export :results output  :dir /sudo::
+cd /home/jj/work/ebench-dps/CH341SER_LINUX
+sudo make load
+#+END_SRC
+
+#+RESULTS:
+: modprobe usbserial
+: insmod ch34x.ko
+
+
+#+BEGIN_SRC bash :eval no-export :results output  :dir /sudo::
+cd /home/jj/work/ebench-dps/CH341SER_LINUX
+sudo make unload
+#+END_SRC
+
+#+RESULTS:
+: rmmod ch34x
+
+#+BEGIN_SRC bash :eval no-export :results output  :dir /sudo::
+sudo reboot
+#+END_SRC
+
+
+* Fin                                                              :noexport:
+
+** Emacs variables
+
+   #+RESULTS:
+
+   # Local Variables:
+   # org-confirm-babel-evaluate: nil
+   # End:
+
+

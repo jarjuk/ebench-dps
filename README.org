@@ -1,0 +1,515 @@
+* ebenchDps - DPS5020 - Digital Control Power Supply  ebench control $Release:0.0.11-SNAPSHOT$
+
+
+* References
+
+- wraps ~dps_modbus.py~ in
+https://forum-raspberrypi.de/forum/thread/46324-ansteuerung-programmierbarer-stepdown-regler-dps/
+
+
+- documentation https://www.mediafire.com/folder/g21va7a0v2c15/power-2#v6b16r86l6xxb
+
+
+* Usage
+
+** Running ~ebenchDsp~ -tool
+
+*** Command line use
+
+ For command line use pass commands and paramters to command ~ebenchDps~
+
+ #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+ <<dps8020>> ? | grep Usage
+ #+END_SRC
+
+ #+RESULTS:
+ : Usage: ebenchDps [options] [commands and parameters] 
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes
+echo <<dps8020>> 
+#+END_SRC
+
+#+RESULTS:
+: ./dps8020
+
+
+*** Interactive usage
+
+ Running the tool without commands line parameters
+
+ #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+ echo <<dps8020>>
+ #+END_SRC
+
+ #+RESULTS:
+ : ./dps8020
+
+ starts interactive session, and the tool prompts for commands and parementers
+
+ #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+ cat << EOF | <<dps8020>> 
+ q
+ EOF
+ #+END_SRC
+
+ #+RESULTS:
+
+
+
+** Options
+
+Supported command line options are
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+# ebenchDps/ebenchDps_main.py --help
+<<dps8020>> --helpfull | sed -n '/ebenchDps_main/,/^$/p'
+#+END_SRC
+
+#+RESULTS:
+: ebenchDps.ebenchDps_main:
+:   --port: MODBUS device port
+:     (default: '/dev/ttyUSB0')
+: 
+
+Refer command ~_ttys~, how to locate device port, where DPS -device
+can be reached.
+
+
+** ~?~ - getting help
+
+
+Running
+
+ #+name: listCommands
+ #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+ <<dps8020>> ?
+ #+END_SRC
+
+list commands supported by the tool
+
+ #+RESULTS: listCommands
+ #+begin_example
+ ebenchDps: Control DPS8020 Digital Power Supply
+
+ Usage: ebenchDps [options] [commands and parameters] 
+
+ Commands:
+
+ ---------- ebenchDps  ----------
+          status  : Read DSP status
+             set  : Configure
+              on  : Turn on
+             csv  : CSV driver
+             off  : Turn off
+ ----------    Util    ----------
+               !  : Start recording
+               .  : Stop recording
+          screen  : Take screenshot
+               ?  : List commands
+              ??  : List command parameters
+ ----------    Quit    ----------
+               q  : Exit
+
+
+ The tool :
+
+ - query Digital Power supply status e.g. voltage/current setpoint
+ - configure voltage and current setpoint
+ - turn output on and off
+ - use CSV file to generate output voltage output
+
+
+ #+end_example
+
+To get more detailed help use ~??~.  For example, to running
+run
+
+#+name: help-set
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+ <<dps8020>> ?? command=set
+#+END_SRC
+
+gives description of ~set~ -command and its parameters:
+
+#+RESULTS: help-set
+#+begin_example
+set - Configure
+
+Configure voltage and current setpoints on DPS. Does NOT change
+output status.
+
+     U_set  : Voltage to set
+     I_set  : Current limit to set
+
+Notice:
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
+#+end_example
+
+
+Command ~??~ gives more detailed help on a command 
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+ <<dps8020>> ?? command='??'
+#+END_SRC
+
+#+RESULTS:
+: ?? - List command parameters
+: 
+:    command  : Command to give help on (None: help on main menu)
+: 
+: Notice:
+: - parameters MUST be given in the order listed above
+: - parameters are optional and they MAY be left out
+
+
+
+* Commands and parameters
+
+# ebenchDps/ebenchDps_main.py
+#+name: dps8020
+#+BEGIN_SRC python :eval no :results output :noweb no :session *Python* :exports none
+./dps8020
+#+END_SRC
+
+** =status= - Read DSP status
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+<<dps8020>> ?? command=status
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+status - Read DSP status
+
+Return DPS status as a JSON document with fields:
+
+- U_set: Voltage setpoint
+- I_set: Current setpoint
+- U_out: Output voltage display value
+- I_out: Output current display value
+- P_out: Output power  display value
+- U_in: input voltage
+- onoff: Output on/off
+- lock: Key lock
+- protect: Protection status
+- cv/cc: Constant Voltage / Constant Current status
+- on/off: switch output state
+- b_led: backligh brighness level
+- model: product model
+- version: firmware version
+
+,*No parameters*
+
+Notice:
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
+#+end_example
+
+Example:
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+<<dps8020>> status
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+{'I_out': 0.0,
+ 'I_set': 1.4,
+ 'P_out': 0.0,
+ 'U_in': 10.38,
+ 'U_out': 0.0,
+ 'U_set': 6.0,
+ 'b_led': 4,
+ 'cv/cc': 0,
+ 'lock': 0,
+ 'model': 5020,
+ 'onoff': 0,
+ 'protect': 0,
+ 'version': 1.6}
+#+end_example
+
+
+
+** =off= - Turn off
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+<<dps8020>> ?? command=off
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+off - Turn off
+
+Turn output off
+        
+
+,*No parameters*
+
+Notice:
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
+#+end_example
+
+For example, use =off= command followed by =status= -command to
+reading device status and ensure that field ~'onoff': 0,~.
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+<<dps8020>> off status
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+{'I_out': 0.0,
+ 'I_set': 1.4,
+ 'P_out': 0.0,
+ 'U_in': 10.38,
+ 'U_out': 0.0,
+ 'U_set': 6.0,
+ 'b_led': 4,
+ 'cv/cc': 0,
+ 'lock': 0,
+ 'model': 5020,
+ 'onoff': 0,
+ 'protect': 0,
+ 'version': 1.6}
+#+end_example
+
+In the output notice ='onoff': 0=
+
+
+** =set= -configure
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+<<dps8020>> ?? command=set
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+set - Configure
+
+Configure voltage and current setpoints on DPS. Does NOT change
+output status.
+
+     U_set  : Voltage to set
+     I_set  : Current limit to set
+
+Notice:
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
+#+end_example
+
+
+The example below, sets output voltaget to =3.3= volts and current
+limit to =0.1= ampere, and switches the output on. Status read shows
+values =U_set= and =U_out=, and =onoff: 1=
+
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+<<dps8020>> off set U_set=3.3 I_set=0.1 status
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+{'I_out': 0.0,
+ 'I_set': 0.1,
+ 'P_out': 0.0,
+ 'U_in': 24.04,
+ 'U_out': 0.0,
+ 'U_set': 3.3,
+ 'b_led': 4,
+ 'cv/cc': 0,
+ 'lock': 0,
+ 'model': 5020,
+ 'onoff': 0,
+ 'protect': 0,
+ 'version': 1.6}
+#+end_example
+
+In the output above, notice:
+- ~'onoff': 0~: device output is off 
+- ~U_out, I_out, P_out=0~: no output 
+- ~U_set': 3.3~: voltage setpoint configured
+- ~I_set': 0.1~: currrent limit configured
+
+
+** =on= turn on
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+<<dps8020>> ?? command=on
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+on - Turn on
+
+Turn output on
+        
+
+,*No parameters*
+
+Notice:
+- parameters above can be in any order
+- parameters are optional and they MAY be left out
+#+end_example
+
+The example configures setpoint 5V,0.2A (command =set= and with
+parameters =U_set=, ~I_set~) , turns the DPS output on (command =on=),
+and read device status (command =status=)
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+<<dps8020>> set U_set=5 I_set=0.2 on status
+#+END_SRC
+
+
+
+In the output above notice:
+- 'U_set': 5.0,
+-  I_set': 0.2,
+-  'onoff': 1,
+
+
+** =csv= - CSV driver
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+<<dps8020>> ?? command=csv
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+csv - CSV driver
+
+Control devices using csvfile (default delimiter comma=,)
+
+Csv file header:
+
+- step_time:
+- voltage:
+- current: 
+
+Example CSV content
+
+
+step_time,voltage,current
+2,0.5,0.1
+3,2.5,0.2
+3,3.3,0.3
+
+  filePath  : Path to CSV -file
+        on  : Switch DPS on
+
+Notice:
+- parameters MUST be given in the order listed above
+- parameters are optional and they MAY be left out
+#+end_example
+
+
+Using CSV file ~example.csv~
+
+#+BEGIN_SRC csv :tangle example.csv :exports code
+step_time,voltage,current
+2,0.5,0.1
+3,2.5,0.2
+3,3.3,0.3
+#+END_SRC
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes
+<<dps8020>> csv filePath=example.csv on=yes
+#+END_SRC
+
+#+RESULTS:
+: ...
+
+
+
+** =_ttys= - List serial devices
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+<<dps8020>> ?? command=_ttys
+#+END_SRC
+
+#+RESULTS:
+: _ttys - List serial devices
+: 
+: List tty devices found
+: 
+:          i  : Index to to show
+: 
+: Notice:
+: - parameters MUST be given in the order listed above
+: - parameters are optional and they MAY be left out
+
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+<<dps8020>> _ttys
+#+END_SRC
+
+#+RESULTS:
+: /dev/ttyUSB0
+
+Give index value to choose one of the ttys found
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+<<dps8020>> _ttys i=0
+#+END_SRC
+
+#+RESULTS:
+: /dev/ttyUSB0
+
+Using index values out of range results to an error
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+(<<dps8020>> _ttys i=10 2>&1 || true ) | grep IndexError
+#+END_SRC
+
+#+RESULTS:
+: IndexError: list index out of range
+
+
+
+** =_info= -command
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
+<<dps8020>> _info
+#+END_SRC
+
+#+RESULTS:
+: {'dpsModel': 5020,
+:  'dpsVersion': 1.6,
+:  'ebenchDps': 'ebench.version=0.0.11-SNAPSHOT, ebenchDps.version=0.0.1-dev1'}
+
+
+* Document information
+
+** Version used
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+<<dps8020>> _version
+#+END_SRC
+
+#+RESULTS:
+
+
+
+
+* Notes                                                            :noexport:
+** Documents 
+
+[[file:~/work/data-sheets/kiina/dps5020]]
+
+COmmunication protocol [[file:~/work/data-sheets/kiina/dps5020/DPS5020%20CNC%20Communication%20Protocol%20V1.2.pdf]]
+Modbus spec: https://modbus.org/docs/PI_MBUS_300.pdf
+
+
+
+* Fin                                                              :noexport:
+
+** Emacs variables
+
+   #+RESULTS:
+
+   # Local Variables:
+   # org-confirm-babel-evaluate: nil
+   # End:
+
+

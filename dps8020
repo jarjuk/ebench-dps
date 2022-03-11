@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+
+import ebenchDps
+
+import os
+import sys
+print( "{} - {}".format(os.path.basename(__file__), ebenchDps.version()), file=sys.stderr)
+# ebenchDps.ebenchDps_main.main()
+ebenchDps.main()
+
