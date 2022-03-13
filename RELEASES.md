@@ -2,6 +2,7 @@
 
 - Initial release
 - configuration defaults taken from ebenchDps/dps5020.ini
+- ModbusInstrument lazy constructor
 
 ## 0.0.0/18.00.2013
 

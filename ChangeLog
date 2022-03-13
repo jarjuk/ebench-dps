@@ -1,4 +1,5 @@
 2022-03-13  jj  <jj@santtu>
 
 	* ebenchDps/ebenchDps.py: dps8020.ini default file from current path
+	(ModbusInstrument.initInstrument): lazy initInstrument
 

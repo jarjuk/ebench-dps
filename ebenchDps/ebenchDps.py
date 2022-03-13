@@ -62,15 +62,71 @@ class ModbusInstrument(Instrument):
     """
 
     def __init__(self, port, addr=1, baud_rate=9600, byte_size=8):
-        self.ser = Serial_modbus( port1=port, addr=addr, baud_rate=baud_rate, byte_size=byte_size)
+        # Save contructor values for lazy initInstrument
+        self.port = port
+        self.addr = addr
+        self.baud_rate = baud_rate
+        self.byte_size = byte_size
+        # self.initInstrument()
+        # self.ser = Serial_modbus( port1=port, addr=addr, baud_rate=baud_rate, byte_size=byte_size)
+
+    def initInstrument(self):
+        """Construct 'Serial_modbus' object using  self.properties
+        
+        Use case: lazy initializer
+
+        """
+        logging.info( "initInstrument: Serial_modbus constructed port=f{self.port}, addr={self.addr},  baud_rate={self.baud_rate}, byte_size={self.byte_size}" )
+        return Serial_modbus( port1=self.port, addr=self.addr, baud_rate=self.baud_rate, byte_size=self.byte_size)
         
     # .................................
     # properties
+    @property
+    def addr(self) -> int :
+        if not hasattr(self, "_addr"):
+             return None
+        return self._addr
+
+    @addr.setter
+    def addr( self, addr:int):
+        self._addr = addr
+
+    @property
+    def port(self) -> str :
+        if not hasattr(self, "_port"):
+             return None
+        return self._port
+
+    @port.setter
+    def port( self, port:str):
+        self._port = port
+
+    @property
+    def baud_rate(self) -> int :
+        if not hasattr(self, "_baud_rate"):
+             return None
+        return self._baud_rate
+
+    @baud_rate.setter
+    def baud_rate( self, baud_rate:int):
+        self._baud_rate = baud_rate
+
+    @property
+    def byte_size(self) -> int :
+        if not hasattr(self, "_byte_size"):
+             return None
+        return self._byte_size
+
+    @byte_size.setter
+    def byte_size( self, byte_size:int):
+        self._byte_size = byte_size
+
 
     @property
     def ser(self) -> Serial_modbus :
+        """Lazy constructor"""
         if not hasattr(self, "_ser"):
-             return None
+            self._ser = self.initInstrument()
         return self._ser
 
     @ser.setter
