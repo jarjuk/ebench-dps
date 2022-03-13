@@ -1,11 +1,11 @@
-* ebDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.5$
+* ebDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.6-SNAPSHOT$
 :PROPERTIES:
 :TOC:      :include all
 :END:
 
 
 :CONTENTS:
-- [[#ebdps---dps5020---control-digital-power-supply--ebench-control-release004][ebDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.5$]]
+- [[#ebdps---dps5020---control-digital-power-supply--ebench-control-release004][ebDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.6-SNAPSHOT$]]
 - [[#references][References]]
 - [[#usage][Usage]]
   - [[#running-ebdps--tool][Running ebDps -tool]]
