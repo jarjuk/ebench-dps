@@ -414,7 +414,7 @@ def dpsVersion():
     return version
 
 def version():
-    return( "ebench.version={}, ebenchDps.version={}".format(ebenchVersion(), dpsVersion()))
+    return( "{}, (ebench.version:{})".format(dpsVersion(),  ebenchVersion() ))
 
 def ttyShow(i):
     """List tty devices found"""
