@@ -13,15 +13,15 @@
  #+begin_example
  /home/jj/bin/releaseit.sh - $Release:0.0.45$
  ------------------------------------------------------------------
- PREV_REL=0.0.0 --> REL=0.0.2-SNAPSHOT
+ PREV_REL=0.0.3 --> REL=0.0.4-SNAPSHOT
  ------------------------------------------------------------------
- ## 0.0.2-SNAPSHOT/20220312-14:03:32
+ ## 0.0.4-SNAPSHOT/20220313-17:26:45
 
  DONE:
- - Initial release
- - configuration defaults taken from ebenchDps/dps5020.ini
- - ModbusInstrument lazy constructor
- - Menu command 'scan_ports' added
+ - setup.py: install VERSION and RELEASES.md in package directory
+
+
+ TDB:
  ------------------------------------------------------------------
  #+end_example
 
@@ -66,7 +66,6 @@ spec/test_framework.py .                                                 [100%]
    (use "git checkout -- <file>..." to discard changes in working directory)
 
          modified:   DEVELOPMENT.org
-         modified:   RELEASES.md
 
  no changes added to commit (use "git add" and/or "git commit -a")
  #+end_example
