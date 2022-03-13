@@ -1,6 +1,7 @@
 *.html
 *.pdf
 *.tex
+*.old
 apu*
 __pycache__
 ebenchDps.egg-info
