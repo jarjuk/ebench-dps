@@ -77,14 +77,7 @@ spec/test_framework.py .                                                 [100%]
  #+END_SRC
 
  #+RESULTS:
- : [master 23f03b3] ## 0.0.2/20220313-17:23:43
- :  1 file changed, 1 insertion(+), 1 deletion(-)
- : [master 1622d0a] ## 0.0.2/20220313-17:23:43
- :  2 files changed, 2 insertions(+), 2 deletions(-)
- : ------------------------------------------------------------------
- : Some files not under version control
- : ?? README.org.old
- : Quit processing
+ : Not a snapshot release 0.0.2
 
 
 
