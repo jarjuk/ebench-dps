@@ -10,12 +10,14 @@ from .dps_modbus import serial_ports, Serial_modbus, Import_limits, Dps5005
 
 import os
 import sys
-from time import sleep
+# from time import sleep
 from absl import logging
 import csv
-from functools import reduce
+#from functools import reduce
 import pathlib
 import errno
+import glob
+import serial
 
 # ------------------------------------------------------------------
 # Usage 
@@ -318,7 +320,37 @@ class DPSInstrument(DPSApi):
         }
         return jsonRet
 
-    
+
+    def serial_ports( self):
+        """
+            Lists serial port names
+        """
+        # Lists serial port names
+        #        :raises EnvironmentError:
+        #        	On unsupported or unknown platforms
+        #        :returns:
+        #        	A list of the serial ports available on the system
+        if sys.platform.startswith('win'):
+            ports = ['COM%s' % (i + 1) for i in range(256)]
+        elif sys.platform.startswith('linux') or sys.platform.startswith('cygwin'):
+            # this excludes your current terminal "/dev/tty"
+            ports = glob.glob('/dev/tty[A-Za-z]*')
+            print( "ports={}".format(ports))                     
+        elif sys.platform.startswith('darwin'):
+            ports = glob.glob('/dev/tty.*')
+        else:
+            raise EnvironmentError('Unsupported platform')
+
+        result = []
+        for port in ports:
+                try:
+                        s = serial.Serial(port)
+                        s.close()
+                        result.append(port)
+                except (OSError, serial.SerialException):
+                        pass
+        return result
+
 
     def csv(self, filePath:str, on:str=None, delimiter:str=","):
         """
@@ -399,6 +431,7 @@ CMD_SET="set"
 CMD_ON="on"
 CMD_OFF="off"
 CMD_CSV="csv"
+CMD_SCAN="scan_ports"
 
 # Hidden commands
 CMD_SHOW_TTYS="_ttys"
@@ -474,6 +507,9 @@ def run( _argv
         CMD_ON                   : ("Turn on", None, instrument.on ),
         CMD_CSV                  : ("CSV driver", csvPar, instrument.csv ),        
         CMD_OFF                  : ("Turn off", None, instrument.off ),
+        
+        "Management"             : MenuCtrl.MENU_SEPATOR_TUPLE,
+        CMD_SCAN                 : ("Scan for device serial address", None, instrument.serial_ports),
 
         "Util"                   : MenuCtrl.MENU_SEPATOR_TUPLE,
         MenuCtrl.MENU_REC_START  : ( "Start recording", None, menuStartRecording(menuController) ),

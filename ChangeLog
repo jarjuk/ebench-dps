@@ -2,4 +2,6 @@
 
 	* ebenchDps/ebenchDps.py: dps8020.ini default file from current path
 	(ModbusInstrument.initInstrument): lazy initInstrument
+	(DPSInstrument.serial_ports): added
+	(run): CMD_SCAN added
 
