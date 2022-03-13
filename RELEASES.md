@@ -5,6 +5,7 @@ DONE:
 - configuration defaults taken from ebenchDps/dps5020.ini
 - ModbusInstrument lazy constructor
 - Menu command 'scan_ports' added
+- release support added
 
 
 
