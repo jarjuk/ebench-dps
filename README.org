@@ -1,13 +1,12 @@
-* ebenchDps - DPS5020 - Digital Control Power Supply  ebench control $Release:0.0.4$
+* ebenchDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.4$
 
 
 * References
 
-- wraps ~dps_modbus.py~ in
+Wrapper for ~dps_modbus.py~
 https://forum-raspberrypi.de/forum/thread/46324-ansteuerung-programmierbarer-stepdown-regler-dps/
 
-
-- documentation https://www.mediafire.com/folder/g21va7a0v2c15/power-2#v6b16r86l6xxb
+for controlling Digital Power Supply DPS8020/5020 in  https://www.mediafire.com/folder/g21va7a0v2c15/power-2#v6b16r86l6xxb
 
 
 * Usage
@@ -19,41 +18,26 @@ https://forum-raspberrypi.de/forum/thread/46324-ansteuerung-programmierbarer-ste
  For command line use pass commands and paramters to command ~ebenchDps~
 
  #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
- <<dps8020>> ? | grep Usage
+ ebDps ? | grep Usage
  #+END_SRC
 
  #+RESULTS:
  : Usage: ebenchDps [options] [commands and parameters] 
 
-#+BEGIN_SRC bash :eval no-export :results output :noweb yes
-echo <<dps8020>> 
-#+END_SRC
-
-#+RESULTS:
-: ./dps8020
-
 
 *** Interactive usage
 
- Running the tool without commands line parameters
+ Running the ~ebDps~ tool without commands line parameters starts
+ interactive session, and the tool prompts for commands and parameters
 
  #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
- echo <<dps8020>>
- #+END_SRC
-
- #+RESULTS:
- : ./dps8020
-
- starts interactive session, and the tool prompts for commands and parementers
-
- #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
- cat << EOF | <<dps8020>> 
+ cat << EOF | ebDps 
  q
  EOF
  #+END_SRC
 
  #+RESULTS:
-
+ : [q=quit,?=commands,??=help on command] > 
 
 
 ** Options
@@ -62,7 +46,7 @@ Supported command line options are
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
 # ebenchDps/ebenchDps_main.py --help
-<<dps8020>> --helpfull | sed -n '/ebenchDps_main/,/^$/p'
+ebDps --helpfull | sed -n '/ebenchDps_main/,/^$/p'
 #+END_SRC
 
 #+RESULTS:
@@ -71,8 +55,8 @@ Supported command line options are
 :     (default: '/dev/ttyUSB0')
 : 
 
-Refer command ~_ttys~, how to locate device port, where DPS -device
-can be reached.
+Refer command ~_ttys~ and ~scan_ports~ how to locate device port,
+where DPS -device can be reached.
 
 
 ** ~?~ - getting help
@@ -82,7 +66,7 @@ Running
 
  #+name: listCommands
  #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
- <<dps8020>> ?
+ ebDps ?
  #+END_SRC
 
 list commands supported by the tool
@@ -101,6 +85,8 @@ list commands supported by the tool
               on  : Turn on
              csv  : CSV driver
              off  : Turn off
+ ---------- Management ----------
+      scan_ports  : Scan for device serial address
  ----------    Util    ----------
                !  : Start recording
                .  : Stop recording
@@ -126,7 +112,7 @@ run
 
 #+name: help-set
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
- <<dps8020>> ?? command=set
+ ebDps ?? command=set
 #+END_SRC
 
 gives description of ~set~ -command and its parameters:
@@ -142,7 +128,7 @@ output status.
      I_set  : Current limit to set
 
 Notice:
-- parameters MUST be given in the order listed above
+- parameters above can be in any order
 - parameters are optional and they MAY be left out
 #+end_example
 
@@ -150,7 +136,7 @@ Notice:
 Command ~??~ gives more detailed help on a command 
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
- <<dps8020>> ?? command='??'
+ ebDps ?? command='??'
 #+END_SRC
 
 #+RESULTS:
@@ -159,7 +145,7 @@ Command ~??~ gives more detailed help on a command
 :    command  : Command to give help on (None: help on main menu)
 : 
 : Notice:
-: - parameters MUST be given in the order listed above
+: - parameters above can be in any order
 : - parameters are optional and they MAY be left out
 
 
@@ -167,15 +153,15 @@ Command ~??~ gives more detailed help on a command
 * Commands and parameters
 
 # ebenchDps/ebenchDps_main.py
-#+name: dps8020
+#+name: ebDps
 #+BEGIN_SRC python :eval no :results output :noweb no :session *Python* :exports none
-./dps8020
+ebDps
 #+END_SRC
 
 ** =status= - Read DSP status
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
-<<dps8020>> ?? command=status
+ebDps ?? command=status
 #+END_SRC
 
 #+RESULTS:
@@ -202,24 +188,24 @@ Return DPS status as a JSON document with fields:
 ,*No parameters*
 
 Notice:
-- parameters MUST be given in the order listed above
+- parameters above can be in any order
 - parameters are optional and they MAY be left out
 #+end_example
 
 Example:
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-<<dps8020>> status
+ebDps status
 #+END_SRC
 
 #+RESULTS:
 #+begin_example
 {'I_out': 0.0,
- 'I_set': 1.4,
+ 'I_set': 2.01,
  'P_out': 0.0,
- 'U_in': 10.38,
+ 'U_in': 20.32,
  'U_out': 0.0,
- 'U_set': 6.0,
+ 'U_set': 5.0,
  'b_led': 4,
  'cv/cc': 0,
  'lock': 0,
@@ -234,7 +220,7 @@ Example:
 ** =off= - Turn off
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
-<<dps8020>> ?? command=off
+ebDps ?? command=off
 #+END_SRC
 
 #+RESULTS:
@@ -255,7 +241,7 @@ For example, use =off= command followed by =status= -command to
 reading device status and ensure that field ~'onoff': 0,~.
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-<<dps8020>> off status
+ebDps off status
 #+END_SRC
 
 #+RESULTS:
@@ -281,7 +267,7 @@ In the output notice ='onoff': 0=
 ** =set= -configure
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
-<<dps8020>> ?? command=set
+ebDps ?? command=set
 #+END_SRC
 
 #+RESULTS:
@@ -306,7 +292,7 @@ values =U_set= and =U_out=, and =onoff: 1=
 
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-<<dps8020>> off set U_set=3.3 I_set=0.1 status
+ebDps off set U_set=3.3 I_set=0.1 status
 #+END_SRC
 
 #+RESULTS:
@@ -336,7 +322,7 @@ In the output above, notice:
 ** =on= turn on
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
-<<dps8020>> ?? command=on
+ebDps ?? command=on
 #+END_SRC
 
 #+RESULTS:
@@ -358,7 +344,7 @@ parameters =U_set=, ~I_set~) , turns the DPS output on (command =on=),
 and read device status (command =status=)
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
-<<dps8020>> set U_set=5 I_set=0.2 on status
+ebDps set U_set=5 I_set=0.2 on status
 #+END_SRC
 
 
@@ -372,7 +358,7 @@ In the output above notice:
 ** =csv= - CSV driver
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
-<<dps8020>> ?? command=csv
+ebDps ?? command=csv
 #+END_SRC
 
 #+RESULTS:
@@ -414,7 +400,7 @@ step_time,voltage,current
 #+END_SRC
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes
-<<dps8020>> csv filePath=example.csv on=yes
+ebDps csv filePath=example.csv on=yes
 #+END_SRC
 
 #+RESULTS:
@@ -422,10 +408,41 @@ step_time,voltage,current
 
 
 
-** =_ttys= - List serial devices
+** =scan_ports= - list tty devices
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
+ebDps ?? command=scan_ports
+#+END_SRC
+
+#+RESULTS:
+: scan_ports - Scan for device serial address
+: 
+: Lists serial port names
+: 
+: *No parameters*
+: 
+: Notice:
+: - parameters above can be in any order
+: - parameters are optional and they MAY be left out
+
+
+Example output on development environment
+
+#+BEGIN_SRC bash :eval no-export :results output :noweb yes
+ebDps scan_ports
+#+END_SRC
+
+#+RESULTS:
+: ports=['/dev/ttyUSB0', '/dev/ttyprintk', '/dev/ttyS31', '/dev/ttyS30', '/dev/ttyS29', '/dev/ttyS28', '/dev/ttyS27', '/dev/ttyS26', '/dev/ttyS25', '/dev/ttyS24', '/dev/ttyS23', '/dev/ttyS22', '/dev/ttyS21', '/dev/ttyS20', '/dev/ttyS19', '/dev/ttyS18', '/dev/ttyS17', '/dev/ttyS16', '/dev/ttyS15', '/dev/ttyS14', '/dev/ttyS13', '/dev/ttyS12', '/dev/ttyS11', '/dev/ttyS10', '/dev/ttyS9', '/dev/ttyS8', '/dev/ttyS7', '/dev/ttyS6', '/dev/ttyS5', '/dev/ttyS4', '/dev/ttyS3', '/dev/ttyS2', '/dev/ttyS1', '/dev/ttyS0']
+: ['/dev/ttyUSB0']
+
+
+
+
+** =_ttys= - Check serial device
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-<<dps8020>> ?? command=_ttys
+ebDps ?? command=_ttys
 #+END_SRC
 
 #+RESULTS:
@@ -436,12 +453,12 @@ step_time,voltage,current
 :          i  : Index to to show
 : 
 : Notice:
-: - parameters MUST be given in the order listed above
+: - parameters above can be in any order
 : - parameters are optional and they MAY be left out
 
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-<<dps8020>> _ttys
+ebDps _ttys
 #+END_SRC
 
 #+RESULTS:
@@ -450,7 +467,7 @@ step_time,voltage,current
 Give index value to choose one of the ttys found
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-<<dps8020>> _ttys i=0
+ebDps _ttys i=0
 #+END_SRC
 
 #+RESULTS:
@@ -459,7 +476,7 @@ Give index value to choose one of the ttys found
 Using index values out of range results to an error
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-(<<dps8020>> _ttys i=10 2>&1 || true ) | grep IndexError
+(ebDps _ttys i=10 2>&1 || true ) | grep IndexError
 #+END_SRC
 
 #+RESULTS:
@@ -467,16 +484,17 @@ Using index values out of range results to an error
 
 
 
+
 ** =_info= -command
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports both
-<<dps8020>> _info
+ebDps _info
 #+END_SRC
 
 #+RESULTS:
 : {'dpsModel': 5020,
 :  'dpsVersion': 1.6,
-:  'ebenchDps': 'ebench.version=0.0.11-SNAPSHOT, ebenchDps.version=0.0.1-dev1'}
+:  'ebenchDps': '0.0.5-SNAPSHOT, (ebench.version:0.0.12-pre7)'}
 
 
 * Document information
@@ -484,10 +502,11 @@ Using index values out of range results to an error
 ** Version used
 
 #+BEGIN_SRC bash :eval no-export :results output :noweb yes :exports results
-<<dps8020>> _version
+ebDps _version
 #+END_SRC
 
 #+RESULTS:
+: 0.0.5-SNAPSHOT, (ebench.version:0.0.12-pre7)
 
 
 
