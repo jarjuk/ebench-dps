@@ -100,9 +100,9 @@ class DPSApi(ModbusInstrument):
     def __init__(self, port:str, addr:int=1, propertiesPath = None ):
         if propertiesPath is None:
             propertiesPath = os.path.join( pathlib.Path(__file__).parent.resolve(), "dps5020.ini")
+        logging.info( f"DPSApi.__init__: propertiesPath={propertiesPath}")
         if not os.path.exists( propertiesPath ):
             raise FileNotFoundError( errno.ENOENT, os.strerror(errno.ENOENT), propertiesPath )
-        logging.info( f"DPSApi.__init__: propertiesPath={propertiesPath}")
         super().__init__(port=port, addr=addr)
         self.limits = Import_limits( propertiesPath )
         self.dps = Dps5005(self, self.limits)
