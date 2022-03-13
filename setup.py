@@ -29,9 +29,9 @@ setuptools.setup(
     package_data={
         "ebenchDps": [ 'VERSION', 'RELEASES.md', "dps5020.ini" ]
     },
-    # data_files=[
-    #     ('etc', ['VERSION', 'RELEASES.md'] )
-    # ],
+    data_files=[
+        ('', ['VERSION', 'RELEASES.md'] )
+    ],
     entry_points = {
         "console_scripts": [ f"{CMDS.CMD_DPS}=ebenchDps.ebenchDps_main:main"
         ],

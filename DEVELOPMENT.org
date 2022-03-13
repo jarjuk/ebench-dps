@@ -199,26 +199,26 @@ spec/test_framework.py .                                                 [100%]
 
  #+RESULTS:
  #+begin_example
- VERSION_FILE=dist/ebenchDps-0.0.4rc1.tar.gz
- Processing ./dist/ebenchDps-0.0.4rc1.tar.gz
- Requirement already satisfied: pyvisa-py in /home/jj/.local/lib/python3.9/site-packages (from ebenchDps==0.0.4rc1) (0.5.2)
- Requirement already satisfied: absl-py in /home/jj/anaconda3/envs/pdata/lib/python3.9/site-packages (from ebenchDps==0.0.4rc1) (0.14.1)
- Requirement already satisfied: six in /home/jj/.local/lib/python3.9/site-packages (from absl-py->ebenchDps==0.0.4rc1) (1.15.0)
- Requirement already satisfied: typing-extensions in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.4rc1) (3.7.4.3)
- Requirement already satisfied: pyvisa>=1.11.0 in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.4rc1) (1.11.3)
+ VERSION_FILE=dist/ebenchDps-0.0.4.tar.gz
+ Processing ./dist/ebenchDps-0.0.4.tar.gz
+ Requirement already satisfied: pyvisa-py in /home/jj/.local/lib/python3.9/site-packages (from ebenchDps==0.0.4) (0.5.2)
+ Requirement already satisfied: absl-py in /home/jj/anaconda3/envs/pdata/lib/python3.9/site-packages (from ebenchDps==0.0.4) (0.14.1)
+ Requirement already satisfied: six in /home/jj/.local/lib/python3.9/site-packages (from absl-py->ebenchDps==0.0.4) (1.15.0)
+ Requirement already satisfied: typing-extensions in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.4) (3.7.4.3)
+ Requirement already satisfied: pyvisa>=1.11.0 in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.4) (1.11.3)
  Building wheels for collected packages: ebenchDps
    Building wheel for ebenchDps (setup.py): started
    Building wheel for ebenchDps (setup.py): finished with status 'done'
-   Created wheel for ebenchDps: filename=ebenchDps-0.0.4rc1-py3-none-any.whl size=13895 sha256=c2ff3279d96595d821fa0977e8afe4c5f1abf2bc9a61271fbbfb2f10e8ef6cbd
-   Stored in directory: /home/jj/.cache/pip/wheels/e1/a5/32/b27568e28129ef08fc4d328fd2efe94094a1d0e693f446f721
+   Created wheel for ebenchDps: filename=ebenchDps-0.0.4-py3-none-any.whl size=13849 sha256=a92bde5facb74003781142ce0eb1a7223b50a814b5c6d95bb26dc1887e5cd1ae
+   Stored in directory: /home/jj/.cache/pip/wheels/43/6e/c1/04a7757f70603e2ba994cc047b75d8d291fd91f2369d7ca79d
  Successfully built ebenchDps
  Installing collected packages: ebenchDps
    Attempting uninstall: ebenchDps
      Found existing installation: ebenchDps 0.0.4rc1
      Uninstalling ebenchDps-0.0.4rc1:
        Successfully uninstalled ebenchDps-0.0.4rc1
- Successfully installed ebenchDps-0.0.4rc1
- installed dist/ebenchDps-0.0.4rc1.tar.gz
+ Successfully installed ebenchDps-0.0.4
+ installed dist/ebenchDps-0.0.4.tar.gz
  #+end_example
 
 
@@ -229,8 +229,8 @@ spec/test_framework.py .                                                 [100%]
  #+END_SRC
 
  #+RESULTS:
- : [master 7d814f7] ## 0.0.4-SNAPSHOT/20220313-17:26:45
- :  3 files changed, 57 insertions(+), 49 deletions(-)
+ : [master 3326b84] ## 0.0.5-SNAPSHOT/20220313-21:49:52
+ :  3 files changed, 42 insertions(+), 39 deletions(-)
 
 
 
