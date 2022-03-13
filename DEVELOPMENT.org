@@ -229,7 +229,7 @@ spec/test_framework.py .                                                 [100%]
 ** Create snapshot
 
  #+BEGIN_SRC sh :eval no-export :results output
- releaseit.sh  create_snapshot current VERSION commit || true
+ releaseit.sh  create_snapshot current VERSION files README.org -  commit || true
  #+END_SRC
 
  #+RESULTS:

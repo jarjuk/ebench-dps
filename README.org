@@ -1,17 +1,45 @@
 * ebDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.4$
+:PROPERTIES:
+:TOC:      :include all
+:END:
+
+
+:CONTENTS:
+- [[#ebdps---dps5020---control-digital-power-supply--ebench-control-release004][ebDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.4$]]
+- [[#references][References]]
+- [[#usage][Usage]]
+  - [[#running-ebdps--tool][Running ebDps -tool]]
+    - [[#command-line-use][Command line use]]
+    - [[#interactive-usage][Interactive usage]]
+  - [[#options][Options]]
+  - [[#---getting-help][? - getting help]]
+- [[#commands-and-parameters][Commands and parameters]]
+  - [[#status---read-dsp-status][status - Read DSP status]]
+  - [[#off---turn-off][off - Turn off]]
+  - [[#set--configure][set -configure]]
+  - [[#on-turn-on][on turn on]]
+  - [[#csv---csv-driver][csv - CSV driver]]
+  - [[#scan_ports---list-tty-devices][scan_ports - list tty devices]]
+  - [[#_ttys---check-serial-device][_ttys - Check serial device]]
+  - [[#_info--command][_info -command]]
+- [[#document-information][Document information]]
+  - [[#version-used][Version used]]
+  - [[#documents][Documents]]
+:END:
 
 
 * References
 
+
 Wrapper for ~dps_modbus.py~
 https://forum-raspberrypi.de/forum/thread/46324-ansteuerung-programmierbarer-stepdown-regler-dps/
-
-for controlling Digital Power Supply DPS8020/5020 in  https://www.mediafire.com/folder/g21va7a0v2c15/power-2#v6b16r86l6xxb
+for controlling Digital Power Supply DPS8020/5020 in
+https://www.mediafire.com/folder/g21va7a0v2c15/power-2#v6b16r86l6xxb
 
 
 * Usage
 
-** Running ~ebenchDsp~ -tool
+** Running ~ebDps~ -tool
 
 *** Command line use
 
@@ -60,7 +88,6 @@ where DPS -device can be reached.
 
 
 ** ~?~ - getting help
-
 
 Running
 
@@ -521,14 +548,14 @@ Modbus spec: https://modbus.org/docs/PI_MBUS_300.pdf
 
 
 
-* Fin                                                              :noexport:
 
-** Emacs variables
+* Fin                                                              :noexport:
 
    #+RESULTS:
 
    # Local Variables:
    # org-confirm-babel-evaluate: nil
+   # org-make-toc-mode: t
    # End:
 
 
