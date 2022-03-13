@@ -1,4 +1,4 @@
-## 0.0.4-SNAPSHOT/20220313-17:26:45
+## 0.0.4/20220313-21:49:30
 
 DONE:
 - setup.py: install VERSION and RELEASES.md in package directory
