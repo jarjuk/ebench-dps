@@ -22,9 +22,16 @@ setuptools.setup(
     long_description="",
     long_description_content_type="text/markdown",
     url="https://github.com/jarjuk/ebench-dps",
+    # package_data={
+    #     "ebenchDps": ['../VERSION', '../RELEASES.md', "dps5020.ini" ]
+    # },
+    # include_package_data=True,
     package_data={
-        "ebenchDps": ['../VERSION', '../RELEASES.md', "dps5020.ini" ]
+        "ebenchDps": [ 'VERSION', 'RELEASES.md', "dps5020.ini" ]
     },
+    # data_files=[
+    #     ('etc', ['VERSION', 'RELEASES.md'] )
+    # ],
     entry_points = {
         "console_scripts": [ f"{CMDS.CMD_DPS}=ebenchDps.ebenchDps_main:main"
         ],

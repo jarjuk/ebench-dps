@@ -408,7 +408,7 @@ class DPSInstrument(DPSApi):
 # Module services
         
 def dpsVersion():
-    versionPath = os.path.join( os.path.dirname( __file__), "..", "VERSION")
+    versionPath = os.path.join( os.path.dirname( __file__), "VERSION")
     with open( versionPath, "r") as fh:
         version = fh.read().rstrip()
     return version

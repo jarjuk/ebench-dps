@@ -1,4 +1,11 @@
 ## 0.0.4-SNAPSHOT/20220313-17:26:45
+
+DONE:
+- setup.py: install VERSION and RELEASES.md in package directory
+
+
+TDB:
+
 ## 0.0.3/20220313-17:26:25
 ## 0.0.2/20220313-17:23:43
 
