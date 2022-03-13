@@ -1,28 +1,137 @@
-* Spec
-
-
-[[file:~/work/data-sheets/kiina/dps5020]]
-
-COmmunication protocol [[file:~/work/data-sheets/kiina/dps5020/DPS5020%20CNC%20Communication%20Protocol%20V1.2.pdf]]
-
-- MODBUS RTU. This can be used via RS232, RS485 or Bluetooth serial interface.
-
-
-Modbus spec: https://modbus.org/docs/PI_MBUS_300.pdf
-
-
-* Activate conda ympäristö =pdata=
-
-#+BEGIN_SRC elisp
-(conda-env-activate "pdata")
-#+END_SRC
-
-#+RESULTS:
-: Switched to conda environment: pdata
-
-
 
 * ebench-dps
+
+*** Build =setup.py= package
+
+ #+BEGIN_SRC bash :eval no-export :results output
+ cat VERSION
+ #+END_SRC
+
+ #+RESULTS:
+ : 0.0.1-dev1
+
+
+ Ref: https://packaging.python.org/guides/distributing-packages-using-setuptools/
+
+ #+BEGIN_SRC bash :eval no-export :results output :exports code
+ python3 setup.py  sdist  bdist_wheel
+ #+END_SRC
+
+ #+RESULTS:
+ #+begin_example
+ version 0.0.2-SNAPSHOT , packages ['ebenchDps']
+ running sdist
+ running egg_info
+ creating ebenchDps.egg-info
+ writing ebenchDps.egg-info/PKG-INFO
+ writing dependency_links to ebenchDps.egg-info/dependency_links.txt
+ writing entry points to ebenchDps.egg-info/entry_points.txt
+ writing requirements to ebenchDps.egg-info/requires.txt
+ writing top-level names to ebenchDps.egg-info/top_level.txt
+ writing manifest file 'ebenchDps.egg-info/SOURCES.txt'
+ reading manifest file 'ebenchDps.egg-info/SOURCES.txt'
+ writing manifest file 'ebenchDps.egg-info/SOURCES.txt'
+ running check
+ creating ebenchDps-0.0.2-SNAPSHOT
+ creating ebenchDps-0.0.2-SNAPSHOT/ebenchDps
+ creating ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying files to ebenchDps-0.0.2-SNAPSHOT...
+ copying setup.py -> ebenchDps-0.0.2-SNAPSHOT
+ copying ebenchDps/CMDS.py -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps
+ copying ebenchDps/__init__.py -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps
+ copying ebenchDps/dps_modbus.py -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps
+ copying ebenchDps/ebenchDps.py -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps
+ copying ebenchDps/ebenchDps_main.py -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps
+ copying ebenchDps.egg-info/PKG-INFO -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying ebenchDps.egg-info/SOURCES.txt -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying ebenchDps.egg-info/dependency_links.txt -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying ebenchDps.egg-info/entry_points.txt -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying ebenchDps.egg-info/requires.txt -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying ebenchDps.egg-info/top_level.txt -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying ebenchDps.egg-info/zip-safe -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps.egg-info
+ copying ebenchDps/../RELEASES.md -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps/..
+ copying ebenchDps/../VERSION -> ebenchDps-0.0.2-SNAPSHOT/ebenchDps/..
+ Writing ebenchDps-0.0.2-SNAPSHOT/setup.cfg
+ Creating tar archive
+ removing 'ebenchDps-0.0.2-SNAPSHOT' (and everything under it)
+ running bdist_wheel
+ running build
+ running build_py
+ copying ebenchDps/../VERSION -> build/lib/ebenchDps/..
+ copying ebenchDps/../RELEASES.md -> build/lib/ebenchDps/..
+ installing to build/bdist.linux-x86_64/wheel
+ running install
+ running install_lib
+ creating build/bdist.linux-x86_64/wheel
+ creating build/bdist.linux-x86_64/wheel/ebenchDps
+ copying build/lib/ebenchDps/ebenchDps.py -> build/bdist.linux-x86_64/wheel/ebenchDps
+ copying build/lib/ebenchDps/CMDS.py -> build/bdist.linux-x86_64/wheel/ebenchDps
+ copying build/lib/ebenchDps/dps_modbus.py -> build/bdist.linux-x86_64/wheel/ebenchDps
+ copying build/lib/ebenchDps/__init__.py -> build/bdist.linux-x86_64/wheel/ebenchDps
+ copying build/lib/ebenchDps/ebenchDps_main.py -> build/bdist.linux-x86_64/wheel/ebenchDps
+ copying build/lib/VERSION -> build/bdist.linux-x86_64/wheel
+ copying build/lib/RELEASES.md -> build/bdist.linux-x86_64/wheel
+ running install_egg_info
+ Copying ebenchDps.egg-info to build/bdist.linux-x86_64/wheel/ebenchDps-0.0.2_SNAPSHOT-py3.9.egg-info
+ running install_scripts
+ creating build/bdist.linux-x86_64/wheel/ebenchDps-0.0.2_SNAPSHOT.dist-info/WHEEL
+ creating 'dist/ebenchDps-0.0.2_SNAPSHOT-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+ adding 'RELEASES.md'
+ adding 'VERSION'
+ adding 'ebenchDps/CMDS.py'
+ adding 'ebenchDps/__init__.py'
+ adding 'ebenchDps/dps_modbus.py'
+ adding 'ebenchDps/ebenchDps.py'
+ adding 'ebenchDps/ebenchDps_main.py'
+ adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/METADATA'
+ adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/WHEEL'
+ adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/entry_points.txt'
+ adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/top_level.txt'
+ adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/zip-safe'
+ adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/RECORD'
+ removing build/bdist.linux-x86_64/wheel
+ #+end_example
+
+ Sync VERSION from release 
+
+ #+BEGIN_SRC sh :eval no-export :results output
+ releaseit.sh  current VERSION || true
+ cat VERSION
+ #+END_SRC
+
+ #+RESULTS:
+ : 0.0.2-SNAPSHOT
+
+
+*** Install distribution package
+
+ #+BEGIN_SRC bash :eval no-export :results output
+ VERSION_FILE=$(ls -1tr dist/*.tar.gz | tail -1| cut -f2)
+ echo VERSION_FILE=$VERSION_FILE
+ python3 -m pip install --user $VERSION_FILE  && echo installed $VERSION_FILE
+ #+END_SRC
+
+ #+RESULTS:
+ #+begin_example
+ VERSION_FILE=dist/ebenchDps-0.0.2-SNAPSHOT.tar.gz
+ Processing ./dist/ebenchDps-0.0.2-SNAPSHOT.tar.gz
+ Requirement already satisfied: pyvisa-py in /home/jj/.local/lib/python3.9/site-packages (from ebenchDps===0.0.2-SNAPSHOT) (0.5.2)
+ Requirement already satisfied: absl-py in /home/jj/anaconda3/envs/pdata/lib/python3.9/site-packages (from ebenchDps===0.0.2-SNAPSHOT) (0.14.1)
+ Requirement already satisfied: six in /home/jj/.local/lib/python3.9/site-packages (from absl-py->ebenchDps===0.0.2-SNAPSHOT) (1.15.0)
+ Requirement already satisfied: pyvisa>=1.11.0 in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps===0.0.2-SNAPSHOT) (1.11.3)
+ Requirement already satisfied: typing-extensions in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps===0.0.2-SNAPSHOT) (3.7.4.3)
+ Building wheels for collected packages: ebenchDps
+   Building wheel for ebenchDps (setup.py): started
+   Building wheel for ebenchDps (setup.py): finished with status 'done'
+   Created wheel for ebenchDps: filename=ebenchDps-0.0.2_SNAPSHOT-py3-none-any.whl size=12102 sha256=977ba396a0a34f4c1f728e5cc2b7dc90dd385c9d20cb32e5408fbbf5de95f8ca
+   Stored in directory: /home/jj/.cache/pip/wheels/d6/ca/7e/8739ecf86e324eb757c93bf59468f3ebe5b6f198905f3a0fcb
+ Failed to build ebenchDps
+ Installing collected packages: ebenchDps
+     Running setup.py install for ebenchDps: started
+     Running setup.py install for ebenchDps: finished with status 'done'
+ Successfully installed ebenchDps-0.0.2-SNAPSHOT
+ installed dist/ebenchDps-0.0.2-SNAPSHOT.tar.gz
+ #+end_example
 
 
 * Notes
