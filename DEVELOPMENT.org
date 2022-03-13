@@ -91,7 +91,7 @@ spec/test_framework.py .                                                 [100%]
  #+END_SRC
 
  #+RESULTS:
- : 0.0.4
+ : 0.0.5-pre3
 
 
  Ref: https://packaging.python.org/guides/distributing-packages-using-setuptools/
@@ -102,7 +102,7 @@ spec/test_framework.py .                                                 [100%]
 
  #+RESULTS:
  #+begin_example
- version 0.0.4 , packages ['ebenchDps']
+ version 0.0.5-pre3 , packages ['ebenchDps']
  running sdist
  running egg_info
  writing ebenchDps.egg-info/PKG-INFO
@@ -113,35 +113,35 @@ spec/test_framework.py .                                                 [100%]
  reading manifest file 'ebenchDps.egg-info/SOURCES.txt'
  writing manifest file 'ebenchDps.egg-info/SOURCES.txt'
  running check
- creating ebenchDps-0.0.4
- creating ebenchDps-0.0.4/ebenchDps
- creating ebenchDps-0.0.4/ebenchDps.egg-info
- copying files to ebenchDps-0.0.4...
- copying RELEASES.md -> ebenchDps-0.0.4
- copying VERSION -> ebenchDps-0.0.4
- copying setup.py -> ebenchDps-0.0.4
- copying ebenchDps/CMDS.py -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps/RELEASES.md -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps/VERSION -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps/__init__.py -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps/dps5020.ini -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps/dps_modbus.py -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps/ebenchDps.py -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps/ebenchDps_main.py -> ebenchDps-0.0.4/ebenchDps
- copying ebenchDps.egg-info/PKG-INFO -> ebenchDps-0.0.4/ebenchDps.egg-info
- copying ebenchDps.egg-info/SOURCES.txt -> ebenchDps-0.0.4/ebenchDps.egg-info
- copying ebenchDps.egg-info/dependency_links.txt -> ebenchDps-0.0.4/ebenchDps.egg-info
- copying ebenchDps.egg-info/entry_points.txt -> ebenchDps-0.0.4/ebenchDps.egg-info
- copying ebenchDps.egg-info/requires.txt -> ebenchDps-0.0.4/ebenchDps.egg-info
- copying ebenchDps.egg-info/top_level.txt -> ebenchDps-0.0.4/ebenchDps.egg-info
- copying ebenchDps.egg-info/zip-safe -> ebenchDps-0.0.4/ebenchDps.egg-info
- Writing ebenchDps-0.0.4/setup.cfg
+ creating ebenchDps-0.0.5rc3
+ creating ebenchDps-0.0.5rc3/ebenchDps
+ creating ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ copying files to ebenchDps-0.0.5rc3...
+ copying RELEASES.md -> ebenchDps-0.0.5rc3
+ copying VERSION -> ebenchDps-0.0.5rc3
+ copying setup.py -> ebenchDps-0.0.5rc3
+ copying ebenchDps/CMDS.py -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps/RELEASES.md -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps/VERSION -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps/__init__.py -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps/dps5020.ini -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps/dps_modbus.py -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps/ebenchDps.py -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps/ebenchDps_main.py -> ebenchDps-0.0.5rc3/ebenchDps
+ copying ebenchDps.egg-info/PKG-INFO -> ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ copying ebenchDps.egg-info/SOURCES.txt -> ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ copying ebenchDps.egg-info/dependency_links.txt -> ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ copying ebenchDps.egg-info/entry_points.txt -> ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ copying ebenchDps.egg-info/requires.txt -> ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ copying ebenchDps.egg-info/top_level.txt -> ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ copying ebenchDps.egg-info/zip-safe -> ebenchDps-0.0.5rc3/ebenchDps.egg-info
+ Writing ebenchDps-0.0.5rc3/setup.cfg
  Creating tar archive
- removing 'ebenchDps-0.0.4' (and everything under it)
+ removing 'ebenchDps-0.0.5rc3' (and everything under it)
  running bdist_wheel
  running build
  running build_py
- copying ebenchDps/ebenchDps.py -> build/lib/ebenchDps
+ copying ebenchDps/CMDS.py -> build/lib/ebenchDps
  copying ebenchDps/VERSION -> build/lib/ebenchDps
  copying ebenchDps/RELEASES.md -> build/lib/ebenchDps
  installing to build/bdist.linux-x86_64/wheel
@@ -160,11 +160,16 @@ spec/test_framework.py .                                                 [100%]
  copying build/lib/ebenchDps/RELEASES.md -> build/bdist.linux-x86_64/wheel/ebenchDps
  copying build/lib/VERSION -> build/bdist.linux-x86_64/wheel
  copying build/lib/RELEASES.md -> build/bdist.linux-x86_64/wheel
+ running install_data
+ creating build/bdist.linux-x86_64/wheel/ebenchDps-0.0.5rc3.data
+ creating build/bdist.linux-x86_64/wheel/ebenchDps-0.0.5rc3.data/data
+ copying VERSION -> build/bdist.linux-x86_64/wheel/ebenchDps-0.0.5rc3.data/data/
+ copying RELEASES.md -> build/bdist.linux-x86_64/wheel/ebenchDps-0.0.5rc3.data/data/
  running install_egg_info
- Copying ebenchDps.egg-info to build/bdist.linux-x86_64/wheel/ebenchDps-0.0.4-py3.9.egg-info
+ Copying ebenchDps.egg-info to build/bdist.linux-x86_64/wheel/ebenchDps-0.0.5rc3-py3.9.egg-info
  running install_scripts
- creating build/bdist.linux-x86_64/wheel/ebenchDps-0.0.4.dist-info/WHEEL
- creating 'dist/ebenchDps-0.0.4-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
+ creating build/bdist.linux-x86_64/wheel/ebenchDps-0.0.5rc3.dist-info/WHEEL
+ creating 'dist/ebenchDps-0.0.5rc3-py3-none-any.whl' and adding 'build/bdist.linux-x86_64/wheel' to it
  adding 'RELEASES.md'
  adding 'VERSION'
  adding 'ebenchDps/CMDS.py'
@@ -176,17 +181,16 @@ spec/test_framework.py .                                                 [100%]
  adding 'ebenchDps/ebenchDps.py'
  adding 'ebenchDps/ebenchDps_main.py'
  adding 'ebenchDps/flycheck_ebenchDps.py'
- adding 'ebenchDps-0.0.4.dist-info/METADATA'
- adding 'ebenchDps-0.0.4.dist-info/WHEEL'
- adding 'ebenchDps-0.0.4.dist-info/entry_points.txt'
- adding 'ebenchDps-0.0.4.dist-info/top_level.txt'
- adding 'ebenchDps-0.0.4.dist-info/zip-safe'
- adding 'ebenchDps-0.0.4.dist-info/RECORD'
+ adding 'ebenchDps-0.0.5rc3.data/data/RELEASES.md'
+ adding 'ebenchDps-0.0.5rc3.data/data/VERSION'
+ adding 'ebenchDps-0.0.5rc3.dist-info/METADATA'
+ adding 'ebenchDps-0.0.5rc3.dist-info/WHEEL'
+ adding 'ebenchDps-0.0.5rc3.dist-info/entry_points.txt'
+ adding 'ebenchDps-0.0.5rc3.dist-info/top_level.txt'
+ adding 'ebenchDps-0.0.5rc3.dist-info/zip-safe'
+ adding 'ebenchDps-0.0.5rc3.dist-info/RECORD'
  removing build/bdist.linux-x86_64/wheel
  #+end_example
-
- Sync VERSION from release 
-
 
  
 ** Install distribution package
@@ -199,26 +203,26 @@ spec/test_framework.py .                                                 [100%]
 
  #+RESULTS:
  #+begin_example
- VERSION_FILE=dist/ebenchDps-0.0.4.tar.gz
- Processing ./dist/ebenchDps-0.0.4.tar.gz
- Requirement already satisfied: pyvisa-py in /home/jj/.local/lib/python3.9/site-packages (from ebenchDps==0.0.4) (0.5.2)
- Requirement already satisfied: absl-py in /home/jj/anaconda3/envs/pdata/lib/python3.9/site-packages (from ebenchDps==0.0.4) (0.14.1)
- Requirement already satisfied: six in /home/jj/.local/lib/python3.9/site-packages (from absl-py->ebenchDps==0.0.4) (1.15.0)
- Requirement already satisfied: typing-extensions in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.4) (3.7.4.3)
- Requirement already satisfied: pyvisa>=1.11.0 in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.4) (1.11.3)
+ VERSION_FILE=dist/ebenchDps-0.0.5rc3.tar.gz
+ Processing ./dist/ebenchDps-0.0.5rc3.tar.gz
+ Requirement already satisfied: pyvisa-py in /home/jj/.local/lib/python3.9/site-packages (from ebenchDps==0.0.5rc3) (0.5.2)
+ Requirement already satisfied: absl-py in /home/jj/anaconda3/envs/pdata/lib/python3.9/site-packages (from ebenchDps==0.0.5rc3) (0.14.1)
+ Requirement already satisfied: six in /home/jj/.local/lib/python3.9/site-packages (from absl-py->ebenchDps==0.0.5rc3) (1.15.0)
+ Requirement already satisfied: pyvisa>=1.11.0 in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.5rc3) (1.11.3)
+ Requirement already satisfied: typing-extensions in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps==0.0.5rc3) (3.7.4.3)
  Building wheels for collected packages: ebenchDps
    Building wheel for ebenchDps (setup.py): started
    Building wheel for ebenchDps (setup.py): finished with status 'done'
-   Created wheel for ebenchDps: filename=ebenchDps-0.0.4-py3-none-any.whl size=13849 sha256=a92bde5facb74003781142ce0eb1a7223b50a814b5c6d95bb26dc1887e5cd1ae
-   Stored in directory: /home/jj/.cache/pip/wheels/43/6e/c1/04a7757f70603e2ba994cc047b75d8d291fd91f2369d7ca79d
+   Created wheel for ebenchDps: filename=ebenchDps-0.0.5rc3-py3-none-any.whl size=14610 sha256=fbfce64443f076cec50065931ff1f6223e12584c818ff2e74d06dd9922b5fe41
+   Stored in directory: /home/jj/.cache/pip/wheels/e8/62/38/753e4a1e3b8ab358b34c4214abdce49c757b737ec1e8e4bd65
  Successfully built ebenchDps
  Installing collected packages: ebenchDps
    Attempting uninstall: ebenchDps
-     Found existing installation: ebenchDps 0.0.4rc1
-     Uninstalling ebenchDps-0.0.4rc1:
-       Successfully uninstalled ebenchDps-0.0.4rc1
- Successfully installed ebenchDps-0.0.4
- installed dist/ebenchDps-0.0.4.tar.gz
+     Found existing installation: ebenchDps 0.0.5rc2
+     Uninstalling ebenchDps-0.0.5rc2:
+       Successfully uninstalled ebenchDps-0.0.5rc2
+ Successfully installed ebenchDps-0.0.5rc3
+ installed dist/ebenchDps-0.0.5rc3.tar.gz
  #+end_example
 
 

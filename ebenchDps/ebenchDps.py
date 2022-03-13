@@ -7,7 +7,7 @@ from ebench import version as ebenchVersion
 
 # wraps https://forum-raspberrypi.de/forum/thread/46324-ansteuerung-programmierbarer-stepdown-regler-dps/
 from .dps_modbus import serial_ports, Serial_modbus, Import_limits, Dps5005
-
+from .CMDS import CMD_DPS
 import os
 import sys
 # from time import sleep
@@ -517,7 +517,7 @@ def run( _argv
         MenuCtrl.MENU_SCREEN     : ( "Take screenshot", MenuCtrl.MENU_SCREENSHOT_PARAM,
                                      menuScreenShot(instrument=instrument,captureDir=captureDir,prefix="Capture-" )),
         MenuCtrl.MENU_HELP       : ( "List commands", None,
-                                    lambda **argV: usage(cmd=CMD, mainMenu=mainMenu, synopsis=SYNOPSIS, usageText=USAGE_TEXT)),
+                                    lambda **argV: usage(cmd=CMD_DPS, mainMenu=mainMenu, synopsis=SYNOPSIS, usageText=USAGE_TEXT)),
         MenuCtrl.MENU_HELP_CMD   : ( "List command parameters", MenuCtrl.MENU_HELP_CMD_PARAM,
                                  lambda **argV: usageCommand(mainMenu=mainMenu, **argV )),
 

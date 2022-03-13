@@ -1,4 +1,4 @@
-* ebenchDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.4$
+* ebDps - DPS5020 - Control Digital Power Supply  ebench control $Release:0.0.4$
 
 
 * References
@@ -22,7 +22,7 @@ for controlling Digital Power Supply DPS8020/5020 in  https://www.mediafire.com/
  #+END_SRC
 
  #+RESULTS:
- : Usage: ebenchDps [options] [commands and parameters] 
+ : Usage: ebDps [options] [commands and parameters] 
 
 
 *** Interactive usage
@@ -75,11 +75,11 @@ list commands supported by the tool
  #+begin_example
  ebenchDps: Control DPS8020 Digital Power Supply
 
- Usage: ebenchDps [options] [commands and parameters] 
+ Usage: ebDps [options] [commands and parameters] 
 
  Commands:
 
- ---------- ebenchDps  ----------
+ ---------- ebDps  ----------
           status  : Read DSP status
              set  : Configure
               on  : Turn on
@@ -506,7 +506,7 @@ ebDps _version
 #+END_SRC
 
 #+RESULTS:
-: 0.0.5-SNAPSHOT, (ebench.version:0.0.12-pre7)
+: 0.0.5-pre3, (ebench.version:0.0.12-pre7)
 
 
 
