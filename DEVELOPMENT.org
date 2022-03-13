@@ -22,13 +22,11 @@
  version 0.0.2-SNAPSHOT , packages ['ebenchDps']
  running sdist
  running egg_info
- creating ebenchDps.egg-info
  writing ebenchDps.egg-info/PKG-INFO
  writing dependency_links to ebenchDps.egg-info/dependency_links.txt
  writing entry points to ebenchDps.egg-info/entry_points.txt
  writing requirements to ebenchDps.egg-info/requires.txt
  writing top-level names to ebenchDps.egg-info/top_level.txt
- writing manifest file 'ebenchDps.egg-info/SOURCES.txt'
  reading manifest file 'ebenchDps.egg-info/SOURCES.txt'
  writing manifest file 'ebenchDps.egg-info/SOURCES.txt'
  running check
@@ -57,8 +55,6 @@
  running bdist_wheel
  running build
  running build_py
- copying ebenchDps/../VERSION -> build/lib/ebenchDps/..
- copying ebenchDps/../RELEASES.md -> build/lib/ebenchDps/..
  installing to build/bdist.linux-x86_64/wheel
  running install
  running install_lib
@@ -67,6 +63,7 @@
  copying build/lib/ebenchDps/ebenchDps.py -> build/bdist.linux-x86_64/wheel/ebenchDps
  copying build/lib/ebenchDps/CMDS.py -> build/bdist.linux-x86_64/wheel/ebenchDps
  copying build/lib/ebenchDps/dps_modbus.py -> build/bdist.linux-x86_64/wheel/ebenchDps
+ copying build/lib/ebenchDps/flycheck_ebenchDps.py -> build/bdist.linux-x86_64/wheel/ebenchDps
  copying build/lib/ebenchDps/__init__.py -> build/bdist.linux-x86_64/wheel/ebenchDps
  copying build/lib/ebenchDps/ebenchDps_main.py -> build/bdist.linux-x86_64/wheel/ebenchDps
  copying build/lib/VERSION -> build/bdist.linux-x86_64/wheel
@@ -83,6 +80,7 @@
  adding 'ebenchDps/dps_modbus.py'
  adding 'ebenchDps/ebenchDps.py'
  adding 'ebenchDps/ebenchDps_main.py'
+ adding 'ebenchDps/flycheck_ebenchDps.py'
  adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/METADATA'
  adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/WHEEL'
  adding 'ebenchDps-0.0.2_SNAPSHOT.dist-info/entry_points.txt'
@@ -118,15 +116,19 @@
  Requirement already satisfied: pyvisa-py in /home/jj/.local/lib/python3.9/site-packages (from ebenchDps===0.0.2-SNAPSHOT) (0.5.2)
  Requirement already satisfied: absl-py in /home/jj/anaconda3/envs/pdata/lib/python3.9/site-packages (from ebenchDps===0.0.2-SNAPSHOT) (0.14.1)
  Requirement already satisfied: six in /home/jj/.local/lib/python3.9/site-packages (from absl-py->ebenchDps===0.0.2-SNAPSHOT) (1.15.0)
- Requirement already satisfied: pyvisa>=1.11.0 in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps===0.0.2-SNAPSHOT) (1.11.3)
  Requirement already satisfied: typing-extensions in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps===0.0.2-SNAPSHOT) (3.7.4.3)
+ Requirement already satisfied: pyvisa>=1.11.0 in /home/jj/.local/lib/python3.9/site-packages (from pyvisa-py->ebenchDps===0.0.2-SNAPSHOT) (1.11.3)
  Building wheels for collected packages: ebenchDps
    Building wheel for ebenchDps (setup.py): started
    Building wheel for ebenchDps (setup.py): finished with status 'done'
-   Created wheel for ebenchDps: filename=ebenchDps-0.0.2_SNAPSHOT-py3-none-any.whl size=12102 sha256=977ba396a0a34f4c1f728e5cc2b7dc90dd385c9d20cb32e5408fbbf5de95f8ca
+   Created wheel for ebenchDps: filename=ebenchDps-0.0.2_SNAPSHOT-py3-none-any.whl size=12273 sha256=232d4cc33e4b897f90285cc17654d13500bddfcfad54edcd5534d9ee8bb03eff
    Stored in directory: /home/jj/.cache/pip/wheels/d6/ca/7e/8739ecf86e324eb757c93bf59468f3ebe5b6f198905f3a0fcb
  Failed to build ebenchDps
  Installing collected packages: ebenchDps
+   Attempting uninstall: ebenchDps
+     Found existing installation: ebenchDps 0.0.2-SNAPSHOT
+     Uninstalling ebenchDps-0.0.2-SNAPSHOT:
+       Successfully uninstalled ebenchDps-0.0.2-SNAPSHOT
      Running setup.py install for ebenchDps: started
      Running setup.py install for ebenchDps: finished with status 'done'
  Successfully installed ebenchDps-0.0.2-SNAPSHOT

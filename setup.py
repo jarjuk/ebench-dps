@@ -23,7 +23,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/jarjuk/ebench-dps",
     package_data={
-        "ebenchDps": ['../VERSION', '../RELEASES.md' ]
+        "ebenchDps": ['../VERSION', '../RELEASES.md', "dps5020.ini" ]
     },
     entry_points = {
         "console_scripts": [ f"{CMDS.CMD_DPS}=ebenchDps.ebenchDps_main:main"

@@ -1,6 +1,7 @@
 ## 0.0.2-SNAPSHOT/20220312-14:03:32
 
 - Initial release
+- configuration defaults taken from ebenchDps/dps5020.ini
 
 ## 0.0.0/18.00.2013
 

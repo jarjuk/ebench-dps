@@ -14,6 +14,8 @@ from time import sleep
 from absl import logging
 import csv
 from functools import reduce
+import pathlib
+import errno
 
 # ------------------------------------------------------------------
 # Usage 
@@ -95,7 +97,12 @@ class DPSApi(ModbusInstrument):
     Instrument API services
     """
 
-    def __init__(self, port:str, addr:int=1, propertiesPath = "dps8020.ini"):
+    def __init__(self, port:str, addr:int=1, propertiesPath = None ):
+        if propertiesPath is None:
+            propertiesPath = os.path.join( pathlib.Path(__file__).parent.resolve(), "dps5020.ini")
+        if not os.path.exists( propertiesPath ):
+            raise FileNotFoundError( errno.ENOENT, os.strerror(errno.ENOENT), propertiesPath )
+        logging.info( f"DPSApi.__init__: propertiesPath={propertiesPath}")
         super().__init__(port=port, addr=addr)
         self.limits = Import_limits( propertiesPath )
         self.dps = Dps5005(self, self.limits)
