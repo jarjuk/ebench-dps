@@ -1,4 +1,8 @@
 ## 0.0.5-SNAPSHOT/20220313-21:49:52
+
+FIXED:
+- ebDps _ttys without parameters stack trace
+
 ## 0.0.4/20220313-21:49:30
 
 DONE:

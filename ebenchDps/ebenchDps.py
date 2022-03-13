@@ -416,7 +416,7 @@ def dpsVersion():
 def version():
     return( "{}, (ebench.version:{})".format(dpsVersion(),  ebenchVersion() ))
 
-def ttyShow(i):
+def ttyShow(i=None):
     """List tty devices found"""
     ttys = serial_ports()
     if not not i and i is not None:
